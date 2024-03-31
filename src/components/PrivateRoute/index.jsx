@@ -1,8 +1,5 @@
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
-import tokenMethod from "../../utils/token";
-import { MODAL_TYPES } from "../../constants/general";
+import { Outlet } from "react-router-dom";
 
 const PrivateRoute = ({redirectPath = "/"}) => {
     // const {handleShowModal} = useAuthContext();
