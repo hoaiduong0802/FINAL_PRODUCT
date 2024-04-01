@@ -1,5 +1,5 @@
 import React from "react";
-import tokenMethod from "../../utils/tooken";
+import tokenMethod from "../../utils/token";
 import { useAuthContext } from "../../context/AuthContext";
 
 const HeaderTop = () => {

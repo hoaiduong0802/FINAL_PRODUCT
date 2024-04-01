@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import tokenMethod from "../utils/tooken";
+import tokenMethod from "../utils/token";
 import { message } from "antd";
 import { authService } from "../services/authServices";
 import { PATHS } from "../constants/paths";
