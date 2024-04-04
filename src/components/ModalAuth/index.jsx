@@ -1,20 +1,37 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useAuthContext } from "../../context/AuthContext";
+import { MODAL_TYPES } from "../../constants/modaltypes";
+import {
+  handleCloseModal,
+  handleShowModal,
+} from "../../store/reducer/authReducer";
+import cn from "../../utils/cn";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
-import cn from "../../utils/cn";
-import { MODAL_TYPES } from "../../constants/modaltypes";
 
 const AuthenModalContainer = styled.div`
   display: ${(props) => (props?.isShow ? "block" : "none")};
 `;
 const AuthenModal = () => {
-  const { showedModal, handleShowModal, handleCloseModal } = useAuthContext();
+  // const { showedModal, handleShowModal, handleCloseModal } = useAuthContext();
+  // const _onTabChange = (e, tab) => {
+  // 	e?.stopPropagation();
+  // 	e?.preventDefault();
+  // 	handleShowModal?.(tab);
+  // };
+  const dispatch = useDispatch();
+  const { showedModal } = useSelector((state) => state.auth);
   const _onTabChange = (e, tab) => {
     e?.stopPropagation();
     e?.preventDefault();
-    handleShowModal?.(tab);
+    dispatch(handleShowModal(tab));
+  };
+
+  const _onCloseModal = (e) => {
+    e?.stopPropagation();
+    e?.preventDefault();
+    dispatch(handleCloseModal());
   };
   return (
     <>
@@ -36,7 +53,7 @@ const AuthenModal = () => {
                 className="close"
                 // data-dismiss="modal"
                 // aria-label="Close"
-                onClick={handleCloseModal}
+                onClick={_onCloseModal}
               >
                 <span aria-hidden="true">
                   <i className="icon-close" />
@@ -270,10 +287,7 @@ const AuthenModal = () => {
       </AuthenModalContainer>
       {/* End .modal */}
       {!!showedModal && (
-        <div
-          className="modal-backdrop fade show"
-          onClick={handleCloseModal}
-        ></div>
+        <div className="modal-backdrop fade show" onClick={_onCloseModal}></div>
       )}
     </>
   );

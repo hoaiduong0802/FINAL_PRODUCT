@@ -1,33 +1,52 @@
 import React from "react";
-import { useAuthContext } from "../../context/AuthContext";
-import { PATHS } from "../../constants/paths";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { PATHS } from "../../constants/paths";
+import Button from "../Button";
 import ComponentLoading from "../ComponentLoading";
 import Input from "../Input";
-import Button from "../Button";
+import { handleRegister } from "../../store/reducer/authReducer";
 
 const RegisterForm = () => {
-  const { handleRegister } = useAuthContext();
+  // const { handleRegister } = useAuthContext();
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const onSubmit = (data) => {
-    if (data) {
-      setLoading(true);
-      handleRegister?.(data, () => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      });
+  const onSubmit = async (data) => {
+    if (data && !loading.register) {
+      // setLoading(true);
+      // handleRegister?.(data, () => {
+      // 	setTimeout(() => {
+      // 		setLoading(false);
+      // 	}, 300);
+      // });
+      try {
+        const { name, email, password } = data;
+        const payload = {
+          firstName: name || "",
+          lastName: "",
+          email,
+          password,
+        };
+        console.log("payload", payload);
+        dispatch(handleRegister(payload));
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
+
+  const renderLoading = useDebounce(loading.register, 300);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ position: "relative" }}>
-      {loading && <ComponentLoading />}
+      {renderLoading && <ComponentLoading />}
       <Input
         label="Your email address"
         required

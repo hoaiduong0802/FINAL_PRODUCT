@@ -1,31 +1,43 @@
-import React from "react";
-import { useAuthContext } from "../../context/AuthContext";
 import { useForm } from "antd/es/form/Form";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { handleLogin } from "../../store/reducer/authReducer";
+import Button from "../Button";
 import ComponentLoading from "../ComponentLoading";
 import Input from "../Input";
-import Button from "../Button";
 
 const LoginForm = () => {
-  const { handleLogin } = useAuthContext();
+  const dispatch = useDispatch();
+  // const { handleLogin, handleCloseModal } = useAuthContext();
+  const { loading } = useSelector((state) => state.auth);
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { errors },
   } = useForm();
-  const [loading, setLoading] = useState(false);
-  const onSubmit = (data) => {
-    if (data) {
-      setLoading(true);
-      handleLogin?.(data, () => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 300);
-      });
+  // const [loading, setLoading] = useState(false)
+
+  const onSubmit = async (data) => {
+    if (data && !loading.login) {
+      // setLoading(true);
+      // handleLogin?.(data, () => {
+      // 	setTimeout(() => {
+      // 		setLoading(false);
+      // 	}, 300);
+      // });
+      try {
+        const res = await dispatch(handleLogin(data)).unwrap();
+        console.log("res", res);
+      } catch (error) {
+        console.log("error", error);
+      }
     }
   };
+
+  const renderLoading = useDebounce(loading.login, 300);
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ position: "relative" }}>
-      {loading && <ComponentLoading />}
+      {renderLoading && <ComponentLoading />}
       <Input
         label="Username or email address"
         required
@@ -36,7 +48,7 @@ const LoginForm = () => {
             message: MESSAGE.email,
           },
         })}
-        error={error?.email?.message || ""}
+        error={errors?.email?.message || ""}
       />
       <Input
         label="Password"
@@ -44,7 +56,7 @@ const LoginForm = () => {
         {...register("password", {
           required: MESSAGE.required,
         })}
-        error={error?.password?.message || ""}
+        error={errors?.password?.message || ""}
       />
       <div className="form-footer">
         <Button type="submit" variant="outline">

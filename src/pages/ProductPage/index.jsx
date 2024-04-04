@@ -1,14 +1,12 @@
-// src/pages/ProductPage/index.jsx
-
-import Pagination from "@/components/Pagination";
 import React from "react";
 import { Link } from "react-router-dom";
-import ProductFilter from "./ProductFilter";
-import ProductList from "./ProductList";
 import ProductToolbox from "./ProductToolbox";
+import ProductList from "./ProductList";
+import ProductFilter from "./ProductFilter";
 import useProductPage from "./useProductPage";
 import Breadcrumb from "../../components/Breadcrumb";
 import { PATHS } from "../../constants/paths";
+import Pagination from "../../components/Pagination";
 
 const ProductsPage = () => {
   const { toolboxProps, productListProps, pagiProps, filterProps } =

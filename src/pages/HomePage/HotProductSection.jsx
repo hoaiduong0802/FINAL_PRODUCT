@@ -39,6 +39,7 @@ const HotProductSection = ({
   };
 
   const renderProducts = _getSelectedProducts(selectedTab);
+  
   return (
     <div className="container featured" style={{ height: 550 }}>
       <ul

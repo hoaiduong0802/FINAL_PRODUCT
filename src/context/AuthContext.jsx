@@ -1,9 +1,9 @@
+import { message } from "antd";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import tokenMethod from "../utils/token";
-import { message } from "antd";
-import { authService } from "../services/authServices";
 import { PATHS } from "../constants/paths";
+import { authService } from "../services/authServices";
+import tokenMethod from "../utils/token";
 
 const AuthContext = createContext({});
 
@@ -59,7 +59,7 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const handleRegister = async (registerData, callback) => {
+  const handleRegister = async (payload, thunkApi) => {
     //Call API
     try {
       const { name, email, password } = registerData;
