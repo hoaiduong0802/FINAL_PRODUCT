@@ -1,9 +1,10 @@
-import { SORT_OPTIONS } from "@/constants/general";
 import queryString from "query-string";
 import { useEffect, useMemo, useRef } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
+import { SORT_OPTIONS } from "../../constants/general";
 import useMutation from "../../hooks/useMutation";
 import { productService } from "../../services/productService";
+import useQuery from "../../hooks/useQuery";
 
 const PRODUCT_LIMITS = 9;
 
@@ -31,11 +32,16 @@ const useProductPage = () => {
   );
   const products = productsData?.products || [];
   const productsPagi = productsData?.pagination || {};
-
   useEffect(() => {
     fetchProducts(search);
   }, [search]);
 
+  //ProductlistProps
+  const productListProps = {
+    isLoading: productsLoading,
+    isError: !!productsError,
+    products,
+  };
   // General Functions
   const updateQueryString = (queryObject) => {
     const newQueryString = queryString.stringify({
@@ -57,7 +63,7 @@ const useProductPage = () => {
   };
 
   // Filter Props
-  const onCateFilterChange = (cateId, isChecked) => {
+  const handleCateFilterChange = (cateId, isChecked) => {
     let newCategoryQuery = Array.isArray(queryObject.category)
       ? [...queryObject.category, cateId]
       : [queryObject.category, cateId];
@@ -71,6 +77,9 @@ const useProductPage = () => {
     if (!cateId) {
       newCategoryQuery = [];
     }
+
+
+    console.log('newCategoryQuery', newCategoryQuery)
 
     updateQueryString({
       ...queryObject,
@@ -120,7 +129,7 @@ const useProductPage = () => {
       queryObject.minPrice || 0,
       queryObject.maxPrice || 1000,
     ],
-    onCateFilterChange,
+    handleCateFilterChange,
     handlePriceFilterChange,
   };
 
@@ -146,6 +155,7 @@ const useProductPage = () => {
     pagiProps,
     toolboxProps,
     filterProps,
+    productListProps,
   };
 };
 

@@ -14,7 +14,6 @@ const ImageWrapper = styled.div`
 `;
 
 const ProductCard = ({ product }) => {
-  console.log('1', 1)
   const { id, slug, title, price, rating, images, discount } = product || {};
   const productPath = PATHS.PRODUCTS + `/${slug}`;
 

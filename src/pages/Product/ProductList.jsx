@@ -17,7 +17,6 @@ const ProductList = ({ isLoading, isError, products }) => {
         <div className="row justify-content-center">There is no products</div>
       </div>
     );
-
   if (isLoading) {
     return (
       <div className="products mb-3">
@@ -41,7 +40,7 @@ const ProductList = ({ isLoading, isError, products }) => {
   return (
     <div className="products mb-3">
       <div className="row justify-content-center">
-        {products.map((product, index) => {
+        {products?.map((product, index) => {
           return (
             <div key={product?.id || index} className="col-6 col-md-4 col-lg-4">
               <ProductCard product={product} />

@@ -1,5 +1,5 @@
-import Checkbox from "@/components/Checkbox";
 import React, { useEffect } from "react";
+import Checkbox from "../../components/Checkbox";
 
 const ProductFilter = ({
   categories,

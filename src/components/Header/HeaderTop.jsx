@@ -11,7 +11,6 @@ const HeaderTop = () => {
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
   const { firstName, email } = profile || {};
-  console.log("profile", profile);
   const _onShowAuthModal = (e) => {
     e?.preventDefault();
     e?.stopPropagation();

@@ -81,7 +81,7 @@ const HeaderMiddle = () => {
         </div>
         <nav className="main-nav">
           <MenuStyled className="menu">
-            <li className="active">
+            <li className="">
               <NavLink to={PATHS.HOME}>Home</NavLink>
             </li>
             <li>
