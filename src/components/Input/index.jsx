@@ -1,23 +1,30 @@
 import { forwardRef } from "react";
 
-const Input = forwardRef(
-  ({ label, required, error, renderInput, ...rest }, ref) => {
+export const Input = forwardRef(
+  (
+    { label, required, error, renderInput = undefined, name = "", ...rest },
+    ref
+  ) => {
     return (
       <div className="form-group">
-        <label className="label">
+        <label className="label" htmlFor={name}>
           {label} {required && <span>*</span>}
         </label>
-        {renderInput?.({ ...rest, error }) || (
+        {renderInput?.(rest, ref) || (
           <input
-            {...rest}
             ref={ref}
-            className={`form__input ${error ? "formerror" : ""}`}
+            className={`form-control ${!!error ? "input-error" : ""}`}
+            name={name}
+            id={name}
+            {...rest}
           />
         )}
-        {error && <p className="error">{error}</p>}
+        <p className="form-error" style={{ minHeight: 23 }}>
+          {error || ""}
+        </p>
       </div>
     );
   }
 );
 
-export default Input;
+export default forwardRef(Input)

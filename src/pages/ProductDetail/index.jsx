@@ -34,8 +34,8 @@ const ProductDetailPage = () => {
             </nav>
             <div className="page-content">
               <div className="container">
-                <ProductDetailTab {...productDetailTabProps} />
                 <ProductDetailTop {...productDetailTopProps} />
+                <ProductDetailTab {...productDetailTabProps} />
               </div>
             </div>
           </main>

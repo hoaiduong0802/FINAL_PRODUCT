@@ -111,6 +111,7 @@ export const handleLogin = createAsyncThunk(
       });
 
       thunkApi.dispatch(handleGetProfile());
+      thunkApi.dispatch(handleGetCart());
 
       message.success("Đăng nhập thành công");
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleLogin } from "../../store/reducer/authReducer";
 import Button from "../Button";
 import ComponentLoading from "../ComponentLoading";
-import Input from "../Input";
+import { Input } from "../Input";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

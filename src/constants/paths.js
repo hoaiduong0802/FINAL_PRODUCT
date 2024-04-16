@@ -6,7 +6,7 @@ const PROFILE_WISHLIST = "/profile/wishlist";
 
 export const PATHS = {
     HOME: "/",
-    PRODUCTS: PROFILE_PATH,
+    PRODUCTS: PRODUCTS_PATH,
     PRODUCT_DETAIL: PRODUCTS_PATH + "/:slug",
     CART: "/cart",
     CHECKOUT: "/checkout",
@@ -18,7 +18,7 @@ export const PATHS = {
     RETURN: "/return",
     SHIPPING: "/shipping",
     PROFILE: {
-        INDEX: PRODUCTS_PATH,
+        INDEX: PROFILE_PATH,
         PROFILE_ORDER: PROFILE_ORDER,
         PROFILE_WISHLIST: PROFILE_WISHLIST,
         PROFILE_ADDRESS: PROFILE_ADDRESS,

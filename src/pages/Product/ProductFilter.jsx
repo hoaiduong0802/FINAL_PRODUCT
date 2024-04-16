@@ -44,6 +44,7 @@ const ProductFilter = ({
   const _onFilterChange = (id, isChecked) => {
     handleCateFilterChange(id, isChecked);
   };
+
   return (
     <aside className="col-lg-3 order-lg-first">
       <div className="sidebar sidebar-shop">
