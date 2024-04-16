@@ -3,6 +3,8 @@ import useCheckoutPage from "./useCheckoutPage";
 import Breadcrumb from "../../components/Breadcrumb";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
+import CheckoutDiscount from "./CheckoutDiscount";
+import CheckoutForm from "./CheckoutForm";
 
 const CheckOutDefault = () => {
   const { couponProps, checkoutFormProps } = useCheckoutPage();
@@ -28,28 +30,15 @@ const CheckOutDefault = () => {
               <Breadcrumb.Item>
                 <Link to={PATHS.PRODUCTS}>Products</Link>
               </Breadcrumb.Item>
-              <Breadcrumb.Item to={PATHS.CHECKOUT} isActive>Checkout</Breadcrumb.Item>
+              <Breadcrumb.Item to={PATHS.CHECKOUT} isActive>
+                Checkout
+              </Breadcrumb.Item>
             </Breadcrumb>
             <div className="page-content">
               <div className="checkout">
                 <div className="container">
-                  <div className="checkout-discount">
-                    <form action="#">
-                      <input
-                        type="text"
-                        className="form-control"
-                        required
-                        id="checkout-discount-input"
-                      />
-                      <label
-                        htmlFor="checkout-discount-input"
-                        className="text-truncate"
-                      >
-                        Have a coupon?{" "}
-                        <span>Click here to enter your code</span>
-                      </label>
-                    </form>
-                  </div>
+                  <CheckoutDiscount {...couponProps} />
+                  <CheckoutForm {...checkoutFormProps} />
                 </div>
               </div>
             </div>

@@ -18,7 +18,7 @@ const InputNumberStyle = styled.input`
 const QuantityInput = (
   {
     className,
-    defaultValue,
+    defaultValue = 1,
     min = 1,
     max = 10,
     step = 1,
@@ -46,6 +46,11 @@ const QuantityInput = (
     setCurrentQuantity(_modifyValue(Number(e.target.value)));
   };
 
+  const _onInputBlur = () => {
+    if (currentQuantity === "") {
+      setCurrentQuantity(defaultValue);
+    }
+  };
   const _onIncrease = () => {
     const value = _modifyValue(Number(currentQuantity) + Number(step));
     setCurrentQuantity(value);
@@ -82,6 +87,7 @@ const QuantityInput = (
           style={{ textAlign: "center" }}
           value={currentQuantity}
           onChange={_onInputChange}
+          onBlur={_onInputBlur}
           max={max}
           {...inputProps}
         />

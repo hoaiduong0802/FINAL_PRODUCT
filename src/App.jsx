@@ -58,11 +58,14 @@ function App() {
           <Route path={PATHS.CONTACT} element={<ContactPage />} />
           <Route path={PATHS.ABOUT} element={<AboutUsPage />} />
           <Route path={PATHS.PRIVATE_POLICY} element={<PrivacyPage />} />
+
           <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
-            <Route path={PATHS.CART} element={<CartPage />} />
-            <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
-            <Route path={PATHS.CHECKOUT_SUCCESS} element={<CheckOutPage />} />
-            <Route path={PATHS.PROFILE.INDEX} element={<DashBoardPage />} />
+            <Route path={PATHS.PROFILE.INDEX} element={<DashBoardPage />}>
+              <Route index element={<AccountPage />} />
+              <Route path={PATHS.CART} element={<CartPage />} />
+              <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
+              <Route path={PATHS.CHECKOUT_SUCCESS} element={<CheckOutPage />} />
+            </Route>
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Route>

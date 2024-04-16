@@ -58,7 +58,7 @@ const useCartPage = () => {
         quantity[updatedIndex] !== updatedQuantity
       ) {
         try {
-          const res = await dispatch(handleUpdateCart(getPayload())).unwrap();
+        const res = await dispatch(handleUpdateCart(getPayload())).unwrap();
         } catch (error) {
           quantityRef.current[updatedIndex]?.reset?.();
           console.log("error", error);
