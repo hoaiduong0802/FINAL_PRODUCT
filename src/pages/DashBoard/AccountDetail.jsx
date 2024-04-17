@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import { useSelector } from "react-redux";
+import FormAccount from "./FormAccount";
 
 const AccountDetail = () => {
-  return (
-    <div>AccountDetail</div>
-  )
-}
+  const { profile, loading } = useSelector((store) => store.auth);
 
-export default AccountDetail
+  if (!profile || loading.getProfile) return null;
+
+  return (
+  profile && <FormAccount profile={profile} />
+  )
+};
+
+export default AccountDetail;

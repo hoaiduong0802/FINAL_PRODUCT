@@ -29,7 +29,7 @@ export const authService = {
     return axiosInstance.get(`/wards/${id}`);
   },
   updateProfile(payload = {}) {
-    return axiosInstance.put(`customer/profiles`, payload, {
+    return axiosInstance.put(`/customer/profiles`, payload, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

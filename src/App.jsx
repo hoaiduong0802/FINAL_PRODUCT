@@ -23,6 +23,11 @@ import ShippingPage from "./pages/ShippingPage";
 import { handleGetProfile } from "./store/reducer/authReducer";
 import { handleGetCart } from "./store/reducer/cartReducer";
 import tokenMethod from "./utils/token";
+import AccountDetail from "./pages/DashBoard/AccountDetail";
+import ListOrder from "./pages/DashBoard/ListOrder";
+import WishList from "./pages/DashBoard/WishList";
+import AddressAccount from "./pages/DashBoard/AddressAccount";
+import ChangePass from "./pages/DashBoard/ChangePass";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,11 +66,27 @@ function App() {
 
           <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
             <Route path={PATHS.PROFILE.INDEX} element={<DashBoardPage />}>
-              <Route index element={<AccountPage />} />
-              <Route path={PATHS.CART} element={<CartPage />} />
-              <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
-              <Route path={PATHS.CHECKOUT_SUCCESS} element={<CheckOutPage />} />
+              <Route index element={<AccountDetail />} />
+              <Route
+                path={PATHS.PROFILE.PROFILE_ORDER}
+                element={<ListOrder />}
+              />
+              <Route
+                path={PATHS.PROFILE.PROFILE_WISHLIST}
+                element={<WishList />}
+              />
+              <Route
+                path={PATHS.PROFILE.PROFILE_ADDRESS}
+                element={<AddressAccount />}
+              />
+              <Route
+                path={PATHS.PROFILE.PROFILE_CHANGE_PASS}
+                element={<ChangePass />}
+              />
             </Route>
+            <Route path={PATHS.CART} element={<CartPage />} />
+            <Route path={PATHS.CHECKOUT} element={<CheckOutPage />} />
+            <Route path={PATHS.CHECKOUT_SUCCESS} element={<ChangePass />} />
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Route>
