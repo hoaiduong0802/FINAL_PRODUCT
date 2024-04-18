@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMainContext } from "../context/MainContext";
+import { handleRemoveFromCart } from "@/store/reducer/cartReducer";
 
-const useHeaderMiddle = () => {
+export const useHeaderMiddle = () => {
   const { handleShowMobileMenuShow } = useMainContext();
   useEffect(() => {
     //Header Searchc Toggle
@@ -63,9 +64,10 @@ const useHeaderMiddle = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const { cartInfo, cartLoading } = useSelector((state) => state.cart);
+  const { cartInfo, cartLoading } = useSelector((state) => state.cart) || {};
   const { product, quantity, total, totalProduct, shipping, variant } =
     cartInfo || {};
+  console.log("cartInfo", cartInfo);
   const handleRemoveProduct = (removedIndex) => {
     if (cartLoading || removedIndex < 0) return;
     dispatch(handleRemoveFromCart({ removedIndex }));
@@ -86,5 +88,3 @@ const useHeaderMiddle = () => {
   };
   return { handleShowMobileMenuShow, cartDropdownProps };
 };
-
-export default useHeaderMiddle;

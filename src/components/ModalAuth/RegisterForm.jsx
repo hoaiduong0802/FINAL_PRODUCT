@@ -1,11 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
 import Button from "../Button";
 import ComponentLoading from "../ComponentLoading";
 import Input from "../Input";
 import { handleRegister } from "../../store/reducer/authReducer";
+import { useForm } from "react-hook-form";
+import { useDebounce } from "@/hooks";
+import { MESSAGE, REGEX } from "@/constants/regex";
+import { useAuthContext } from "@/context/AuthContext";
+import { message } from "antd";
 
 const RegisterForm = () => {
   // const { handleRegister } = useAuthContext();
@@ -20,12 +25,6 @@ const RegisterForm = () => {
 
   const onSubmit = async (data) => {
     if (data && !loading.register) {
-      // setLoading(true);
-      // handleRegister?.(data, () => {
-      // 	setTimeout(() => {
-      // 		setLoading(false);
-      // 	}, 300);
-      // });
       try {
         const { name, email, password } = data;
         const payload = {
@@ -38,7 +37,7 @@ const RegisterForm = () => {
         dispatch(handleRegister(payload));
       } catch (error) {
         console.log("error", error);
-      }
+      } 
     }
   };
 

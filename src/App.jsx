@@ -45,6 +45,8 @@ function App() {
       //handleGetCart
       dispatch(handleGetCart());
     }
+
+    console.log('tokenMethod.get()', tokenMethod.get())
   }, []);
 
   return (
@@ -66,11 +68,13 @@ function App() {
 
           <Route element={<PrivateRoute redirectPath={PATHS.HOME} />}>
             <Route path={PATHS.PROFILE.INDEX} element={<DashBoardPage />}>
-              <Route index element={<AccountDetail />} />
               <Route
-                path={PATHS.PROFILE.PROFILE_ORDER}
-                element={<ListOrder />}
-              />
+                  path={PATHS.PROFILE.PROFILE_ORDER}
+                  element={<ListOrder />}
+                  
+                />
+              <Route index element={<AccountDetail />} />
+            
               <Route
                 path={PATHS.PROFILE.PROFILE_WISHLIST}
                 element={<WishList />}

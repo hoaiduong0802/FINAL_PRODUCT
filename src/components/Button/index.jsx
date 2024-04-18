@@ -22,7 +22,9 @@ const Button = ({
     case "grey":
       variantClass = "btn btn--grey";
       break;
-
+    case "outline":
+      variantClass = "btn btn-outline-primary-2"
+      break;
     default:
       break;
   }

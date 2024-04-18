@@ -9,13 +9,12 @@ export const localToken = {
 
 export const cookieToken = {
   get: () => {
-    JSON.parse(
-      Cookies.get(STORAGE.token) !== undefined
-        ? Cookies.get(Storage.token)
-        : null
-    );
+    return Cookies.get(STORAGE.token)
+      ? JSON.parse(Cookies.get(STORAGE.token))
+      : undefined;
   },
-  set: (token) => Cookies.set(STORAGE.token, JSON.stringify(token)),
+  set: (token) =>
+    token ? Cookies.set(STORAGE.token, JSON.stringify(token)) : undefined,
   remove: () => Cookies.remove(STORAGE.token),
 };
 

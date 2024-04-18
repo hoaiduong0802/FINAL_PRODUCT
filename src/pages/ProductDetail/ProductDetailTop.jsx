@@ -73,17 +73,23 @@ const ProductDetailTop = ({
               <label>Color:</label>
               <ProductColor ref={colorRef} colors={color} />
             </div>
-            <div className="details-filter-row details-row-size">
+           { <div className="details-filter-row details-row-size">
               <label htmlFor="qty">Qty:</label>
               <div className="product-details-quantity">
                 <QuantityInput max={stock} ref={quantityRef} />
               </div>
-            </div>
+            </div>}
             <div className="product-details-action">
-              <a
+             <a
                 href="#"
                 className="btn-product btn-cart"
                 onClick={_onAddToCart}
+                style={stock <= 0 ? {
+                  pointerEvents:'none',
+                  background:'grey',
+                  borderColor:'white',
+                  color:'white'
+                } : {}}
               >
                 <span>add to cart</span>
               </a>

@@ -63,13 +63,13 @@ const AuthContextProvider = ({ children }) => {
     //Call API
     try {
       const { name, email, password } = registerData;
-      const payload = {
+      const formPayload = {
         firstName: name || "",
         lastName: "",
         email,
         password,
       };
-      const res = await authService.register(payload);
+      const res = await authService.register(formPayload);
       if (res?.data?.data.id) {
         message.success("Đăng ký thành công!!!");
         handleLogin({

@@ -17,79 +17,29 @@ const NavAccount = () => {
     <aside className="col-md-4 col-lg-3">
       <ul className="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
         <li className="nav-item">
-          <NavLink
-            className="nav-link"
-            end
-            to={PATHS.PROFILE.INDEX}
-            // id="tab-account-link"
-            // data-toggle="tab"
-            // href="#tab-account"
-            // role="tab"
-            // aria-controls="tab-account"
-            // aria-selected="false"
-          >
+          <NavLink className="nav-link" end to={PATHS.PROFILE.INDEX}>
             Account Details
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            className="nav-link"
-            end
-            to={PATHS.PROFILE.PROFILE_ORDER}
-            // id="tab-orders-link"
-            // data-toggle="tab"
-            // href="#tab-orders"
-            // role="tab"
-            // aria-controls="tab-orders"
-            // aria-selected="false"
-          >
+          <NavLink className="nav-link" end to={PATHS.PROFILE.PROFILE_ORDER}>
             Orders
           </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            className="nav-link"
-            end
-            to={PATHS.PROFILE.PROFILE_ADDRESS}
-            // id="tab-address-link"
-            // data-toggle="tab"
-            // href="#tab-address"
-            // role="tab"
-            // aria-controls="tab-address"
-            // aria-selected="false"
-          >
+          <NavLink className="nav-link" end to={PATHS.PROFILE.PROFILE_ADDRESS}>
             Adresses
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            className="nav-link"
-            end
-            to={PATHS.PROFILE.PROFILE_WISHLIST}
-            // id="tab-wishlist-link"
-            // data-toggle="tab"
-            // href="#tab-wishlist"
-            // role="tab"
-            // aria-controls="tab-wishlist"
-            // aria-selected="false"
-          >
+          <NavLink className="nav-link" end to={PATHS.PROFILE.PROFILE_WISHLIST}>
             Wishlist
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <a
-            className="nav-link"
-            end
-            to={PATHS.PROFILE.PROFILE_CHANGE_PASS}
-            // id="tab-wishlist-link"
-            // data-toggle="tab"
-            // href="#tab-wishlist"
-            // role="tab"
-            // aria-controls="tab-wishlist"
-            // aria-selected="false"
-          >
+          <NavLink className="nav-link" end to={PATHS.PROFILE.PROFILE_CHANGE_PASS}>
             Change password
-          </a>
+          </NavLink>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#" onClick={_onSignOut}>

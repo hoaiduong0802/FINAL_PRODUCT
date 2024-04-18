@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-export const Input = forwardRef(
+ const Input = forwardRef(
   (
     { label, required, error, renderInput = undefined, name = "", ...rest },
     ref
@@ -27,4 +27,4 @@ export const Input = forwardRef(
   }
 );
 
-export default forwardRef(Input)
+export default Input

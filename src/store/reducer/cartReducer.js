@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { cartServices } from "../../services/cartServices";
 import { message } from "antd";
-import { thunk } from "redux-thunk";
+import { cartServices } from "../../services/cartServices";
 import { sumArrayNumber } from "../../utils/calculate";
 
 const initialState = {
@@ -48,25 +47,25 @@ export const cartSlice = createSlice({
 
     //REMOVE CART
     builder.addCase(handleRemoveFromCart.pending, (state) => {
-        state.cartLoading = true;
-    })
+      state.cartLoading = true;
+    });
     builder.addCase(handleRemoveFromCart.fulfilled, (state) => {
-        state.cartLoading = false;
-    })
+      state.cartLoading = false;
+    });
     builder.addCase(handleRemoveFromCart.rejected, (state) => {
-        state.cartLoading = false;
-    })
+      state.cartLoading = false;
+    });
 
     //UPDATE CART
     builder.addCase(handleUpdateCart.pending, (state) => {
-        state.cartLoading = true;
-    })
+      state.cartLoading = true;
+    });
     builder.addCase(handleUpdateCart.fulfilled, (state) => {
-        state.cartLoading = false;
-    })
+      state.cartLoading = false;
+    });
     builder.addCase(handleUpdateCart.rejected, (state) => {
-        state.cartLoading = false;
-    })
+      state.cartLoading = false;
+    });
   },
 });
 
@@ -83,7 +82,7 @@ export const handleGetCart = createAsyncThunk(
     try {
       const cartRes = await cartServices.getCart();
 
-      return cartRes.data?.data;
+      return cartRes?.data?.data;
     } catch (error) {
       thunkApi.rejectWithValue(error);
     }
@@ -96,18 +95,18 @@ export const handleAddCart = createAsyncThunk(
     try {
       const { addedId, addedColor, addedQuantity, addedPrice } = actionPayload;
       const { cartInfo } = thunkApi.getState()?.cart || {};
-
+      console.log('cart', thunkApi.getState())
       let addPayload = {};
       if (cartInfo.id) {
-        const matchIndex = cartInfo.product?.findIndex(
+        const matchIndex = cartInfo?.product?.findIndex(
           (product) => product.id === addedId
         );
-        const newProduct = cartInfo.product?.map((product) => {
+        const newProduct = cartInfo?.product?.map((product) => {
           return product.id;
         });
-        const newQuantity = [...(cartInfo.quantity ?? [])];
-        const newVariant = [...(cartInfo.variant ?? [])];
-        const newTotalProduct = [...(cartInfo.totalproduct ?? [])];
+        const newQuantity = [...(cartInfo?.quantity ?? [])];
+        const newVariant = [...(cartInfo?.variant ?? [])];
+        const newTotalProduct = [...(cartInfo?.totalproduct ?? [])];
         if (matchIndex > -1 && newVariant[matchIndex] === addedColor) {
           newQuantity[matchIndex] =
             Number(newQuantity[matchIndex]) + Number(addedQuantity);
@@ -126,7 +125,7 @@ export const handleAddCart = createAsyncThunk(
             (curr, next) => Number(curr) + Number(next),
             0
           ) || 0;
-        const newTotal = newSubtotal - cartInfo.discount;
+        const newTotal = newSubtotal - cartInfo?.discount;
         addPayload = {
           ...cartInfo,
           product: newProduct,
@@ -152,9 +151,11 @@ export const handleAddCart = createAsyncThunk(
       const cartRes = await cartServices.updateCart(addPayload);
       thunkApi.dispatch(handleGetCart());
       message.success("Add to cart successfully");
+
+      console.log("cartInfo 2", cartInfo);
       return cartRes?.data?.data;
     } catch (error) {
-      thunkApi.rejectWithValue(error);
+      // thunkApi.rejectWithValue(error);
       message.error("Add to cart failes");
     }
   }

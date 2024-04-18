@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import useQuery from "../../hooks/useQuery";
 import { productService } from "../../services/productService";
 import { handleAddCart } from "../../store/reducer/cartReducer";
+import { useDispatch } from "react-redux";
 const useProductDetailPage = () => {
   //Initial Hooks
+  const dispatch = useDispatch();
   const { slug } = useParams();
   const colorRef = useRef();
   const quantityRef = useRef();
@@ -15,7 +17,9 @@ const useProductDetailPage = () => {
     () => productService.getProductDetail(slug),
     [slug]
   );
-  const { id, name, description, shippingReturn } = productDetailData || {};
+  console.log("productDetailData", productDetailData);
+  const { id, name, description, shippingReturn, price, discount } =
+    productDetailData || {};
 
   const { data: productDetailReviews } = useQuery(
     () => id && productService.getProductReview(id),
@@ -40,6 +44,7 @@ const useProductDetailPage = () => {
       addedQuantity: quantity,
       addedPrice: price - discount,
     };
+    console.log('addPayload', addPayload)
     try {
       const res = dispatch(handleAddCart(addPayload)).unwrap();
       if (res) {

@@ -3,7 +3,7 @@ $(document).ready(function () {
     'use strict';
 
     // owlCarousels();
-    quantityInputs();
+    // quantityInputs();
 
     // Header Search Toggle
 
@@ -648,7 +648,7 @@ $(document).ready(function () {
                                 $('.curidx').html(currentIndex + 1);
                             }
                         });
-                        quantityInputs();
+                        // quantityInputs();
                     },
                     open: function () {
                         $('body').css('overflow-x', 'visible');

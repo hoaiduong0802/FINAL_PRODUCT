@@ -44,7 +44,7 @@ const ProductDetailTab = ({ description, shippingReturn, reviews }) => {
             href="#product-review-tab"
             onClick={(e) => _onTabChange(e, TABS.review)}
           >
-            Reviews (2)
+            Reviews ({reviews?.length})
           </a>
         </li>
       </ul>
@@ -70,7 +70,6 @@ const ProductDetailTab = ({ description, shippingReturn, reviews }) => {
             aria-labelledby="product-shipping-link"
           >
             <div className="product-desc-content">
-              <h3>Delivery &amp; returns</h3>
               <div dangerouslySetInnerHTML={{ __html: shippingReturn }} />
             </div>
           </div>

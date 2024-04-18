@@ -3,7 +3,7 @@ import React from "react";
 const WishList = () => {
   return (
     <div
-      className="tab-pane fade"
+      className="tab-pane active"
       id="tab-wishlist"
       role="tabpanel"
       aria-labelledby="tab-wishlist-link"

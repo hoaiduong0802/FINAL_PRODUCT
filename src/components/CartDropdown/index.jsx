@@ -1,11 +1,10 @@
-import React from "react";
 // import DropdownContainer from "./DropdownContainer";
-import { PATHS } from "../../constants/paths";
-import styled from "styled-components";
+import { Modal } from "antd";
 import { Link } from "react-router-dom";
-import ProductColor from "../ProductColor";
+import styled from "styled-components";
+import { PATHS } from "../../constants/paths";
 import { formatCurrency } from "../../utils/format";
-import { Empty } from "antd";
+import ProductColor from "../ProductColor";
 
 const DropdownContainer = styled.div`
   max-height: 30vh;

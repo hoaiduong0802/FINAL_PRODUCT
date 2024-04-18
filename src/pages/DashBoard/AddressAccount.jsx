@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { authService } from "../../services/authServices";
 import { Link } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
+import useQuery from "@/hooks/useQuery";
 
 const AddressAccount = () => {
   const { profile } = useSelector((store) => store.auth);

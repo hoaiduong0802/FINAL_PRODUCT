@@ -21,7 +21,7 @@ const DashBoardPage = () => {
               </div>
             </div>
             <Breadcrumb>
-              <Breadcrumb.Item>
+            <Breadcrumb.Item>
                 <Link to={PATHS.HOME}>Home</Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item isActive>My Account</Breadcrumb.Item>

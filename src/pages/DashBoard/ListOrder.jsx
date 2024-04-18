@@ -1,18 +1,19 @@
-import React from "react";
+import { PATHS } from "@/constants/paths";
+import { Link } from "react-router-dom";
 
 const ListOrder = () => {
   return (
     <div
-      className="tab-pane fade"
+      className="tab-pane active"
       id="tab-orders"
       role="tabpanel"
       aria-labelledby="tab-orders-link"
     >
       <p>No order has been made yet.</p>
-      <a href="category.html" className="btn btn-outline-primary-2">
+      <Link to={PATHS.PRODUCTS} variant="outline">
         <span>GO SHOP</span>
         <i className="icon-long-arrow-right" />
-      </a>
+      </Link>
       <br />
       <br />
       <table className="table table-cart table-mobile">

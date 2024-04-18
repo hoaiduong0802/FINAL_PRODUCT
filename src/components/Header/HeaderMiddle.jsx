@@ -1,14 +1,13 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
-import useHeaderMiddle from "../../hooks/useHeaderMiddle";
 import CartDropdown from "../CartDropdown";
 import Search from "../Search";
 import MenuStyled from "../StyledMenu";
+import { useHeaderMiddle } from "@/hooks";
 
 const HeaderMiddle = () => {
   const { handleShowMobileMenuShow, cartDropdownProps } = useHeaderMiddle();
-  console.log('cartDropdownProps', cartDropdownProps)
   return (
     <div className="header-middle sticky-header">
       <div className="container">

@@ -6,7 +6,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 
-const InputNumberStyle = styled.input`
+export const InputNumberStyle = styled.input`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -41,7 +41,6 @@ const QuantityInput = (
   useEffect(() => {
     onChange?.(currentQuantity);
   }, [currentQuantity]);
-
   const _onInputChange = (e) => {
     setCurrentQuantity(_modifyValue(Number(e.target.value)));
   };
@@ -77,6 +76,8 @@ const QuantityInput = (
           <button
             className="btn btn-drcrement btn-spinner"
             onClick={_onDecrease}
+            // disabled={max <= 0}
+
           >
             <i className="icon-minus"></i>
           </button>
@@ -97,6 +98,7 @@ const QuantityInput = (
             className="btn btn-increment btn-spinner"
             type="button"
             onClick={_onIncrease}
+            disabled={max <= 0}
           >
             <i className="icon-plus"></i>
           </button>

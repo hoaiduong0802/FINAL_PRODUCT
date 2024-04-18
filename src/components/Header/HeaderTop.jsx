@@ -1,15 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MODAL_TYPES } from "../../constants/modaltypes";
 import { handleLogout, handleShowModal } from "../../store/reducer/authReducer";
 import tokenMethod from "../../utils/token";
+import { PATHS } from "@/constants/paths";
 
 const HeaderTop = () => {
   // const { handleShowModal, handleLogout, profile } = useAuthContext();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { profile } = useSelector((state) => state.auth);
+  console.log('profile', profile)
   const { firstName, email } = profile || {};
   const _onShowAuthModal = (e) => {
     e?.preventDefault();
@@ -44,7 +46,7 @@ const HeaderTop = () => {
                     onClick={_onShowAuthModal}
                   >
                     <i className="icon-user" />
-                    Login | Resgister{" "}
+                    Login | Resgister
                   </a>
                 </li>
               </ul>
@@ -54,23 +56,23 @@ const HeaderTop = () => {
               {/* Logged In */}
               <ul className="top-menu">
                 <li>
-                  <a href="#" className="top-link-menu">
+                  <Link to={PATHS.PROFILE.INDEX} className="top-link-menu">
                     <i className="icon-user" />
-                    Thai Nguyen{"{"}" "{"}"}
-                  </a>
+                    {profile?.firstName == "" ? profile?.email : profile?.firstName }
+                  </Link>
                   <ul>
                     <li>
                       <ul>
                         <li>
-                          <a href="dashboard.html">Account Details</a>
+                          <Link to={PATHS.PROFILE.INDEX}>Account Details</Link>
                         </li>
                         <li>
-                          <a href="dashboard.html">Your Orders</a>
+                          <Link to={PATHS.PROFILE.PROFILE_ORDER}>Your Orders</Link>
                         </li>
                         <li>
-                          <a href="dashboard.html">
-                            Wishlist <span>(3)</span>
-                          </a>
+                          <Link to={PATHS.PROFILE.PROFILE_WISHLIST}>
+                            Wishlist <span>{profile?.whiteList}</span>
+                          </Link>
                         </li>
                         <li>
                           <a href="#" onClick={_onSignOut}>

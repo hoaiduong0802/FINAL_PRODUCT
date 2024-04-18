@@ -1,6 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import { message } from "antd";
 import tokenMethod from "../../utils/token";
+import { authService } from "@/services/authServices";
+import { handleGetCart } from "./cartReducer";
 
 const initialState = {
   showedModal: "",
@@ -40,10 +42,9 @@ export const authSlice = createSlice({
       .addCase(handleRegister.rejected, (state) => {
         state.loading.register = false;
       })
-
       .addCase(handleLogin.fulfilled, (state) => {
         state.loading.login = false;
-        state.showedModal = "";
+        state.showedModal = undefined;
       })
       .addCase(handleLogin.pending, (state) => {
         state.loading.login = true;
@@ -51,7 +52,6 @@ export const authSlice = createSlice({
       .addCase(handleLogin.rejected, (state) => {
         state.loading.login = false;
       })
-
       .addCase(handleGetProfile.fulfilled, (state, action) => {
         state.profile = action.payload;
         state.loading.getProfile = false;
@@ -90,10 +90,11 @@ export const handleRegister = createAsyncThunk(
         throw false;
       }
     } catch (error) {
-      const errorInfo = error?.response?.data;
+      const errorInfo = error?.response?.data?.message[0];
       if (errorInfo.error === "Forbidden") {
         message.error("Email đã được đăng ký");
       }
+      message.error(errorInfo)
       return thunkApi.rejectWithValue(errorInfo);
     }
   }
@@ -104,14 +105,16 @@ export const handleLogin = createAsyncThunk(
   async (payload, thunkApi) => {
     try {
       const loginRes = await authService.login(payload);
+
       const { token: accessToken, refreshToken } = loginRes?.data?.data || {};
       tokenMethod.set({
         accessToken,
         refreshToken,
       });
 
+
       thunkApi.dispatch(handleGetProfile());
-      thunkApi.dispatch(handleGetCart());
+      thunkApi.dispatch(handleGetCart()); /// error
 
       message.success("Đăng nhập thành công");
 
