@@ -1,5 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import styled from "styled-components";
 
+const RadioCustomGroup = styled.div`
+  display: flex;
+  align-items: center;
+  padding: unset;
+  column-gap: 8px;
+`;
 const RadioContext = createContext();
 const RadioGroup = ({
   defaultValue,
@@ -31,7 +38,10 @@ const RadioGroup = ({
 const RadioItem = ({ children, disabled = false, value }) => {
   const { value: selectedValue, onCheckChange } = useContext(RadioContext);
   return (
-    <div className="custom-control custom-radio">
+    <RadioCustomGroup
+      className="custom-control custom-radio"
+      
+    >
       <input
         className="custome-control-input"
         type="radio"
@@ -45,11 +55,11 @@ const RadioItem = ({ children, disabled = false, value }) => {
       <label
         className="custome-control-label"
         htmlFor={value}
-        style={{ cursor: "pointer" }}
+        style={{ cursor: "pointer", margin: "unset" }}
       >
         {children}
       </label>
-    </div>
+    </RadioCustomGroup>
   );
 };
 

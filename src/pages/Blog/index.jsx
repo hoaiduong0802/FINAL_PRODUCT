@@ -1,6 +1,25 @@
+import EntryComponent from "@/components/BlogEntry";
+import Breadcrumb from "@/components/Breadcrumb";
+import { PATHS } from "@/constants/paths";
+import useQuery from "@/hooks/useQuery";
+import { blogServices } from "@/services/blogServices";
+import { formatDate } from "@/utils/format";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import WidgetBlog from "./WidgetBlog";
 
 const Blog = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { data: blogsData, loading: blogsLoading } = useQuery(
+    blogServices.getBlogData
+  );
+  const blogs = blogsData?.blogs || [];
+  const blogsPagi = blogsData?.pagination || [];
+
+  console.log("blogs", blogs);
   return (
     <>
       <div>
@@ -16,18 +35,14 @@ const Blog = () => {
                 <h1 className="page-title">Blog</h1>
               </div>
             </div>
-            <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
-              <div className="container">
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="index.html">Home</a>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    Blog
-                  </li>
-                </ol>
-              </div>
-            </nav>
+            <Breadcrumb>
+              <Breadcrumb.Item>
+                <Link to={PATHS.HOME}>Home</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item isActive>
+                <Link to={PATHS.BLOG}>Blog</Link>
+              </Breadcrumb.Item>
+            </Breadcrumb>
             <div className="page-content">
               <div className="container">
                 <div className="row">
@@ -36,7 +51,51 @@ const Blog = () => {
                       className="entry-container max-col-2"
                       data-layout="fitRows"
                     >
-                      <div className="entry-item col-sm-6">
+                      {/* <EntryComponent /> */}
+                      {blogs?.map((blog, index) => {
+                        return (
+                          <div
+                            className="entry-item col-sm-6"
+                            key={blog?.id || index}
+                          >
+                            <article className="entry entry-grid">
+                              <figure className="entry-media">
+                                <a href="blog-single.html">
+                                  <img src={blog?.image} alt={blog.name} />
+                                </a>
+                              </figure>
+                              <div className="entry-body">
+                                <div className="entry-meta">
+                                  <span>{formatDate(blog?.updatedAt)}</span>
+                                  <span className="meta-separator">|</span>
+                                  <span className="entry-author">
+                                    by{" "}
+                                    <Link to={PATHS.BLOG}>{blog?.author}</Link>
+                                  </span>
+                                </div>
+                                <h2 className="entry-title">
+                                  <a href="blog-single.html">{blog.name}</a>
+                                </h2>
+                                <div className="entry-content">
+                                  <p>
+                                    Sed pretium, ligula sollicitudin laoreet
+                                    viverra, tortor libero sodales leo, eget
+                                    blandit nunc tortor eu nibh. Suspendisse
+                                    potenti. Sed egestas vulputate ...
+                                  </p>
+                                  <a
+                                    href="blog-single.html"
+                                    className="read-more"
+                                  >
+                                    Read More
+                                  </a>
+                                </div>
+                              </div>
+                            </article>
+                          </div>
+                        );
+                      })}
+                      {/* <div className="entry-item col-sm-6">
                         <article className="entry entry-grid">
                           <figure className="entry-media">
                             <a href="blog-single.html">
@@ -259,7 +318,7 @@ const Blog = () => {
                             </div>
                           </div>
                         </article>
-                      </div>
+                      </div> */}
                     </div>
                     <nav aria-label="Page navigation">
                       <ul className="pagination">
@@ -303,160 +362,7 @@ const Blog = () => {
                       </ul>
                     </nav>
                   </div>
-                  <aside className="col-lg-3">
-                    <div className="sidebar">
-                      <div className="widget widget-search">
-                        <h3 className="widget-title">Search</h3>
-                        <form action="#">
-                          <label htmlFor="ws" className="sr-only">
-                            Search in blog
-                          </label>
-                          <input
-                            type="search"
-                            className="form-control"
-                            name="ws"
-                            id="ws"
-                            placeholder="Search in blog"
-                            required
-                          />
-                          <button type="submit" className="btn">
-                            <i className="icon-search" />
-                            <span className="sr-only">Search</span>
-                          </button>
-                        </form>
-                      </div>
-                      <div className="widget widget-cats">
-                        <h3 className="widget-title">Categories</h3>
-                        <ul>
-                          <li>
-                            <a href="#">
-                              Lifestyle <span>3</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              Shopping <span>3</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              Fashion <span>1</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              Travel <span>3</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              Hobbies <span>2</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="widget">
-                        <h3 className="widget-title">Popular Posts</h3>
-                        <ul className="posts-list">
-                          <li>
-                            <figure>
-                              <a href="#">
-                                <img
-                                  src="assets/images/blog/sidebar/post-1.jpg"
-                                  alt="post"
-                                />
-                              </a>
-                            </figure>
-                            <div>
-                              <span>Nov 22, 2018</span>
-                              <h4>
-                                <a href="#">
-                                  Aliquam tincidunt mauris eurisus.
-                                </a>
-                              </h4>
-                            </div>
-                          </li>
-                          <li>
-                            <figure>
-                              <a href="#">
-                                <img
-                                  src="assets/images/blog/sidebar/post-2.jpg"
-                                  alt="post"
-                                />
-                              </a>
-                            </figure>
-                            <div>
-                              <span>Nov 19, 2018</span>
-                              <h4>
-                                <a href="#">Cras ornare tristique elit.</a>
-                              </h4>
-                            </div>
-                          </li>
-                          <li>
-                            <figure>
-                              <a href="#">
-                                <img
-                                  src="assets/images/blog/sidebar/post-3.jpg"
-                                  alt="post"
-                                />
-                              </a>
-                            </figure>
-                            <div>
-                              <span>Nov 12, 2018</span>
-                              <h4>
-                                <a href="#">
-                                  Vivamus vestibulum ntulla nec ante.
-                                </a>
-                              </h4>
-                            </div>
-                          </li>
-                          <li>
-                            <figure>
-                              <a href="#">
-                                <img
-                                  src="assets/images/blog/sidebar/post-4.jpg"
-                                  alt="post"
-                                />
-                              </a>
-                            </figure>
-                            <div>
-                              <span>Nov 25, 2018</span>
-                              <h4>
-                                <a href="#">
-                                  Donec quis dui at dolor tempor interdum.
-                                </a>
-                              </h4>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="widget widget-banner-sidebar">
-                        <div className="banner-sidebar-title">
-                          ad box 280 x 280
-                        </div>
-                        <div className="banner-sidebar banner-overlay">
-                          <a href="#">
-                            <img
-                              src="assets/images/blog/sidebar/banner.jpg"
-                              alt="banner"
-                            />
-                          </a>
-                        </div>
-                      </div>
-                      <div className="widget">
-                        <h3 className="widget-title">Browse Tags</h3>
-                        <div className="tagcloud">
-                          <a href="#">fashion</a>
-                          <a href="#">style</a>
-                          <a href="#">women</a>
-                          <a href="#">photography</a>
-                          <a href="#">travel</a>
-                          <a href="#">shopping</a>
-                          <a href="#">hobbies</a>
-                        </div>
-                      </div>
-                    </div>
-                  </aside>
+                  <WidgetBlog />
                 </div>
               </div>
             </div>

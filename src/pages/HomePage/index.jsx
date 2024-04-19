@@ -18,7 +18,6 @@ const HomePage = () => {
     serviceProps,
     getDealProps,
   } = useHomePage();
-  console.log('introProps', introProps)
   return (
     <main className="main">
       <IntroSection {...introProps} />

@@ -11,17 +11,14 @@ const useHomePage = () => {
   // API Handling
   const { data: productsData } = useQuery(productService.getProducts);
   const products = productsData?.products || [];
-  console.log('products Usehomepage', products)
   const featuredProducts =
     products?.filter((product) => product.featured) || [];
-    console.log('featuredProducts', featuredProducts)
   const onSaleProducts = products?.filter((product) => product.onSale) || [];
   const topRatedProducts =
     products?.filter((product) => product.topRated) || [];
   const { data: homeData } = useQuery(() =>
     pageService.getPageDataByName("home")
   );
-  console.log("homedata", homeData);
   const services = homeData?.data?.information || {};
 
   const brands = homeData?.data?.brands || [];

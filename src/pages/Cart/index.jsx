@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { PATHS } from "../../constants/paths";
 import CartTable from "./CartTable";
 import CartSummary from "./CartSummary";
+import useCartPage from "./useCartPage";
 
 const CartPage = () => {
   const { cartTableProps, cartSummaryProps } = useCartPage();

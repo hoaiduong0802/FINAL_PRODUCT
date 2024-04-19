@@ -46,63 +46,6 @@ const CartSummary = ({ subTotal, total, typeShip, handleUpdateShipping }) => {
                 );
               })}
             </RadioGroup>
-            {/* <tr className="summary-shipping-row">
-              <td>
-                <div className="custom-control custom-radio">
-                  <input
-                    type="radio"
-                    id="free-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="free-shipping"
-                  >
-                    Free Shipping
-                  </label>
-                </div>
-              </td>
-              <td>$0.00</td>
-            </tr>
-            <tr className="summary-shipping-row">
-              <td>
-                <div className="custom-control custom-radio">
-                  <input
-                    type="radio"
-                    id="standart-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="standart-shipping"
-                  >
-                    Standart:
-                  </label>
-                </div>
-              </td>
-              <td>$10.00</td>
-            </tr>
-            <tr className="summary-shipping-row">
-              <td>
-                <div className="custom-control custom-radio">
-                  <input
-                    type="radio"
-                    id="express-shipping"
-                    name="shipping"
-                    className="custom-control-input"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor="express-shipping"
-                  >
-                    Express:
-                  </label>
-                </div>
-              </td>
-              <td>$20.00</td>
-            </tr> */}
             <tr className="summary-shipping-estimate">
               <td>
                 Estimate for Your Country <br />

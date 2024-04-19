@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { PATHS } from "../../constants/paths";
+import { Modal } from "antd";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 import ProductColor from "../../components/ProductColor";
-import { formatCurrency } from "../../utils/format";
 import QuantityInput from "../../components/QuantityInput";
+import { PATHS } from "../../constants/paths";
+import { formatCurrency } from "../../utils/format";
 
 const ProductTitle = styled.h3`
   display: flex !important;
@@ -21,6 +21,7 @@ const ProductTitle = styled.h3`
   .product-nav-dots {
     margin: 0;
   }
+
 `;
 const CartTable = ({
   products,

@@ -66,8 +66,8 @@ const CartDropdown = ({ products, total, shipping, handleRemoveProduct }) => {
   };
   return (
     <div className="dropdown cart-dropdown">
-      <a
-        href="#"
+      <Link
+        to={PATHS.CART}
         className="dropdown-toggle"
         role="button"
         data-toggle="dropdown"
@@ -77,7 +77,7 @@ const CartDropdown = ({ products, total, shipping, handleRemoveProduct }) => {
       >
         <i className="icon-shopping-cart" />
         <span className="cart-count">{products?.length || 0}</span>
-      </a>
+      </Link>
       <div className="dropdown-menu dropdown-menu-right" style={{ width: 400 }}>
         {products?.length > 0 ? (
           <>

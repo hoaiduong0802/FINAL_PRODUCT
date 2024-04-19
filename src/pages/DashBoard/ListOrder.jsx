@@ -1,7 +1,27 @@
+import Button from "@/components/Button";
 import { PATHS } from "@/constants/paths";
-import { Link } from "react-router-dom";
+import { formatCurrency } from "@/utils/format";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const ListOrder = () => {
+  const { cartInfo } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+
+  const { product, subTotal, price, quantity, variant, totalProduct } =
+    cartInfo || {};
+  const renderProductInfo =
+    product?.map((item, index) => ({
+      ...item,
+      price: price?.[index],
+      quantity: quantity?.[index],
+      variant: variant?.[index],
+      totalProduct: totalProduct?.[index],
+    })) || [];
+
+  const handleMovetoProducts = () => {
+    navigate(PATHS.PRODUCTS);
+  };
   return (
     <div
       className="tab-pane active"
@@ -10,10 +30,14 @@ const ListOrder = () => {
       aria-labelledby="tab-orders-link"
     >
       <p>No order has been made yet.</p>
-      <Link to={PATHS.PRODUCTS} variant="outline">
+      <Button
+        to={PATHS.PRODUCTS}
+        variant="outline"
+        onClick={handleMovetoProducts}
+      >
         <span>GO SHOP</span>
         <i className="icon-long-arrow-right" />
-      </Link>
+      </Button>
       <br />
       <br />
       <table className="table table-cart table-mobile">
@@ -26,46 +50,32 @@ const ListOrder = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td className="product-col">
-              <div className="product">
-                <figure className="product-media">
-                  <a href="#">
-                    <img
-                      src="assets/images/demos/demo-3/products/product-3.jpg"
-                      alt="Product image"
-                    />
-                  </a>
-                </figure>
-                <h3 className="product-title">
-                  <a href="#">Beige knitted</a>
-                </h3>
-              </div>
-            </td>
-            <td className="price-col text-center">$84.00</td>
-            <td className="quantity-col text-center">1</td>
-            <td className="total-col text-center">$84.00</td>
-          </tr>
-          <tr>
-            <td className="product-col">
-              <div className="product">
-                <figure className="product-media">
-                  <a href="#">
-                    <img
-                      src="assets/images/demos/demo-3/products/product-2.jpg"
-                      alt="Product image"
-                    />
-                  </a>
-                </figure>
-                <h3 className="product-title">
-                  <a href="#">Blue utility</a>
-                </h3>
-              </div>
-            </td>
-            <td className="price-col text-center">$76.00</td>
-            <td className="quantity-col text-center">1</td>
-            <td className="total-col text-center">$76.00</td>
-          </tr>
+          {renderProductInfo?.map((product) => {
+            const { name, quantity, totalProduct, images } = product || {};
+            return (
+              <tr key={product?.id || ""}>
+                <td className="product-col">
+                  <div className="product">
+                    <figure className="product-media">
+                      <a href="#">
+                        <img src={images[0]} alt={name} />
+                      </a>
+                    </figure>
+                    <h3 className="product-title">
+                      <a href="#">{name}</a>
+                    </h3>
+                  </div>
+                </td>
+                <td className="price-col text-center">
+                  ${formatCurrency(subTotal)}
+                </td>
+                <td className="quantity-col text-center">{quantity}</td>
+                <td className="total-col text-center">
+                  ${formatCurrency(totalProduct)}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

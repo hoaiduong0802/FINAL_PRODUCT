@@ -13,3 +13,8 @@
     background-color: #f9f9f9 !important;
     color: #777 !important;
 }
+
+.custom-control.custom-radio {
+    display: flex;
+    align-items: center;
+}

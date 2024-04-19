@@ -92,7 +92,7 @@ const useCartPage = () => {
 
   const cartTableProps = {
     products:
-      product.map((item, index) => {
+      product?.map((item, index) => {
         return {
           ...item,
           quantity: quantity?.[index],
